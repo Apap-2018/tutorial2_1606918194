@@ -28,20 +28,29 @@ public class PageController {
 	@RequestMapping("/generator")
 	public String generator(@RequestParam(value = "a", required = false, defaultValue = "0") int a, @RequestParam(value = "b", required = false, defaultValue = "0") int b, Model model) {
 		
-		String result = "hm";
+		String result = "";
 		
 		model.addAttribute("a", a);
 		model.addAttribute("b", b);
 		
-		for (int i = 1; i < a; i++) {
-			result += "m";
+		if (a == 0 && b == 0) {
+			result = "hm";
 		}
 		
-		String temp = "";
-		for (int i = 0 ; i < b ; i++) {
-			temp += result + " ";
+		else {
+			if (a == 0) a = 1;
+			if (b == 0) b = 1;
 			
-			result = temp;
+			String temp = "";
+			for (int i = 0 ; i < b ; i++) {
+				temp = temp + " h";
+				
+				for (int j = 0; j < a; j++) {
+					temp = temp + "m";
+				}
+				
+				result = temp;
+			}
 		}
 		
 		model.addAttribute("result", result);
